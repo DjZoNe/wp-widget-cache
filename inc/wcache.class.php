@@ -21,7 +21,7 @@ class WCache
 	 * @param string $disable_output
 	 *        	disable track the output(ob_start) or not
 	 */
-	function WCache($cache_dir, $disable = false, $disable_output = false)
+	function __construct($cache_dir, $disable = false, $disable_output = false)
 	{
 		if (function_exists ( "version_compare" ))
 		{
@@ -50,7 +50,7 @@ class WCache
 		{
 			$cache_dir .= "/";
 		}
-		
+
 		$this->path = $cache_dir;
 		$this->disable = $disable;
 		$this->disable_output = $disable_output;
@@ -350,7 +350,7 @@ class WCache
 
 	function __encode_key($name)
 	{
-		return md5 ( $name );
+		return md5 ( $name . '_' . $_SERVER['SERVER_NAME'] );
 	}
 
 	function __get_key_path($key, $group = false)
